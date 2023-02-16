@@ -32,3 +32,14 @@ ffmpeg -i CINCO-OUT.mxf -pix_fmt yuv420p -c:v libx264 -c:a aac -b:a 384k -sn MXF
 ```bash
 ffmpeg -i INPUT.mov -ss 00:00:00 -to 00:40:00 OUTPUT.mov
 ```
+
+## PNG to file
+### MP4
+```bash
+ffmpeg -framerate 24 -pattern_type glob -i '*.png' -c:v libx264 -pix_fmt yuv420p out.mp4
+```
+
+### PRORES
+```bash
+ffmpeg -framerate 24 -pattern_type glob -i '*.png' -c:v prores -profile:v 0 -pix_fmt yuv422p10 out.mov
+```
