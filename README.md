@@ -53,3 +53,8 @@ ffmpeg -i in.mp4 -vf yadif,format=yuv420p -force_key_frames "expr:gte(t,n_forced
 ```bash
 ffmpeg -i input.mp4 out-%4d.png
 ```
+
+# Add Audio to Video
+```bash
+ffmpeg -i input.mp4 -i input.mp3 -c copy -map 0:v:0 -map 1:a:0 output.mp4
+```
