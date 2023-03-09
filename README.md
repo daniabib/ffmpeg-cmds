@@ -58,3 +58,13 @@ ffmpeg -i input.mp4 out-%4d.png
 ```bash
 ffmpeg -i input.mp4 -i input.mp3 -c copy -map 0:v:0 -map 1:a:0 output.mp4
 ```
+# Image Manipulation
+### Flip
+```bash
+ffmpeg -pattern_type glob -i '*.png' -filter:v hflip flipped/flipped-%3d.png
+```
+
+### Rotate
+```bash
+ffmpeg -pattern_type glob -i '*.png' -vf transpose=2 rotate-%3d.png
+```
