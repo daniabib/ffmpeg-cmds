@@ -44,6 +44,11 @@ ffmpeg -framerate 24 -pattern_type glob -i '*.png' -c:v libx264 -pix_fmt yuv420p
 ffmpeg -framerate 24 -pattern_type glob -i '*.png' -c:v prores -profile:v 0 -pix_fmt yuv422p10 out.mov
 ```
 
+### PRORES 4444
+```bash
+ffmpeg -framerate 24 -pattern_type glob -i '*.png' -c:v prores_ks -profile:v 4444 -pix_fmt yuva444p10 out.mov
+```
+
 ### YouTube
 ```bash
 ffmpeg -i in.mp4 -vf yadif,format=yuv420p -force_key_frames "expr:gte(t,n_forced/2)" -c:v libx264 -crf 18 -bf 2 -c:a aac -q:a 1 -ac 2 -ar 48000 -use_editlist 0 -movflags +faststart out.mp4
