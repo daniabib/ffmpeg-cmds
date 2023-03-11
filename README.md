@@ -68,3 +68,8 @@ ffmpeg -pattern_type glob -i '*.png' -filter:v hflip flipped/flipped-%3d.png
 ```bash
 ffmpeg -pattern_type glob -i '*.png' -vf transpose=2 rotate-%3d.png
 ```
+
+# DeFlicker
+```bash
+ffmpeg -fflags +genpts -i NOFLICKER.mov -fflags +genpts -i NOFLICKER.mov -filter_complex "[0:v]setpts=PTS-STARTPTS[top]; [1:v]setpts=PTS-STARTPTS+.033/TB, format=yuva420p, colorchannelmixer=aa=0.5[bottom]; [top][bottom]overlay=shortest=1" -c:v prores -profile:v 0 -pix_fmt yuv422p10 NOFLICKER-02.mov
+```
