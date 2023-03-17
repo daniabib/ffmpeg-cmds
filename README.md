@@ -63,11 +63,24 @@ ffmpeg -i input.mp4 out-%4d.png
 ```bash
 ffmpeg -i input.mp4 -i input.mp3 -c copy -map 0:v:0 -map 1:a:0 output.mp4
 ```
+
+# Count frames
+```bash
+ffprobe -v error -select_streams v:0 -count_packets -show_entries stream=nb_read_packets -of csv=p=0 input.mp4
+```
+
+# Extract frames at certain fps
+```bash
+time for i in {0..39} ; do ffmpeg -accurate_seek -ss `echo $i*60.0 | bc` -i input.mp4 -frames:v 1output-$i.png ; done
+```
+To change how mane frames extrac per second, modify it at: `echo $i*{fps} | bc`
+
 # Image Manipulation
 ### Flip
 ```bash
 ffmpeg -pattern_type glob -i '*.png' -filter:v hflip flipped/flipped-%3d.png
 ```
+` 
 
 ### Rotate
 ```bash
