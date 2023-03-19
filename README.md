@@ -71,7 +71,7 @@ ffprobe -v error -select_streams v:0 -count_packets -show_entries stream=nb_read
 
 # Extract frames at certain fps
 ```bash
-time for i in {0..39} ; do ffmpeg -accurate_seek -ss `echo $i*60.0 | bc` -i input.mp4 -frames:v 1output-$i.png ; done
+time for i in {0..39} ; do ffmpeg -accurate_seek -ss `echo $i*60.0 | bc` -i input.mp4 -frames:v 1 output-$i.png ; done
 ```
 To change how mane frames extrac per second, modify it at: `echo $i*{fps} | bc`
 
