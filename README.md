@@ -28,6 +28,11 @@ https://www.youtube.com/watch?v=LAZ-bkK-AGw
 ffmpeg -i CINCO-OUT.mxf -pix_fmt yuv420p -c:v libx264 -c:a aac -b:a 384k -sn MXF-OUT.mov
 ```
 
+## MXF to mp4
+```bash
+ffmpeg -i input.mfx -c:v libx264 -preset slow -crf 18 -c:a aac -b:a 256k output.mp4
+```
+
 ## 6. Cut
 ```bash
 ffmpeg -i INPUT.mov -ss 00:00:00 -to 00:40:00 OUTPUT.mov
