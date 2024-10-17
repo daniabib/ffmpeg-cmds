@@ -9,6 +9,15 @@ ffmpeg -i INPUT.mp4 -c:a copy -c:v prores -profile:v 0 -pix_fmt yuv422p10 OUTPUT
 https://ottverse.com/ffmpeg-convert-to-apple-prores-422-4444-hq/
 https://wideopenbokeh.com/AthenasFall/?p=111
 
+Batch process:
+```bash
+mkdir -p PRORES
+for file in *.mp4; do
+  base_name=$(basename "$file" .mp4)
+  ffmpeg -i "$file" -c:a copy -c:v prores -profile:v 0 -pix_fmt yuv422p10 "PRORES/${base_name}.mov"
+done
+```
+
 ## 2. Davinci Resolve Timeline
 https://videowithjens.com/how-to-make-instagram-reels-in-davinci-resolve-full-guide/
 
