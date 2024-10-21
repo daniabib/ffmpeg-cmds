@@ -93,6 +93,14 @@ time for i in {0..39} ; do ffmpeg -accurate_seek -ss `echo $i*60.0 | bc` -i inpu
 To change how mane frames extrac per second, modify it at: `echo $i*{fps} | bc`
 
 # Image Manipulation
+### Batch Resize (to 4MB max)
+```bash
+mkdir -p RESIZED
+for file in *.jpg; do
+  base_name=$(basename "$file" .jpg)
+  ffmpeg -i "$file" -vf "scale='if(gt(iw*ih,4000000),trunc(2000*iw/ih),iw)':'if(gt(iw*ih,4000000),2000,ih)'" "RESIZED/${base_name}.jpg"
+done
+```
 ### Flip
 ```bash
 ffmpeg -pattern_type glob -i '*.png' -filter:v hflip flipped/flipped-%3d.png
