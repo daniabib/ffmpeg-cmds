@@ -14,7 +14,7 @@ Batch process:
 mkdir -p PRORES
 for file in *.mp4; do
   base_name=$(basename "$file" .mp4)
-  ffmpeg -i "$file" -c:a copy -c:v prores -profile:v 0 -pix_fmt yuv422p10 "PRORES/${base_name}.mov"
+  ffmpeg -i "$file" -c:v prores_ks -profile:v 3 -pix_fmt yuv422p10le -c:a pcm_s16le -ar 48000 "PRORES/${base_name}.mov"
 done
 ```
 
