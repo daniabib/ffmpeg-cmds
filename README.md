@@ -39,7 +39,17 @@ ffmpeg -i CINCO-OUT.mxf -pix_fmt yuv420p -c:v libx264 -c:a aac -b:a 384k -sn MXF
 
 ## MXF to mp4
 ```bash
-ffmpeg -i input.mfx -c:v libx264 -preset slow -crf 18 -c:a aac -b:a 256k output.mp4
+mkdir -p H264
+for file in *.mxf; do
+  base_name=$(basename "$file" .mxf)
+  ffmpeg -i "$file" \
+    -filter_complex "[0:a:0][0:a:1]amerge=inputs=2[a]" \
+    -map 0:v:0 -map "[a]" \
+    -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p \
+    -c:a aac -b:a 256k -ac 2 \
+    -movflags +faststart \
+    "H264/${base_name}.mp4"
+done
 ```
 
 ## 6. Cut
